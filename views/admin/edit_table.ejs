@@ -1,0 +1,23 @@
+<%- include('../layout/head.ejs') %>
+<%- include('../layout/mid.ejs') %>
+  <h1>Edit Table</h1>
+  
+  <form action="/api/v1/table/update" method="post">
+    <input type="hidden" name="tableId" value="<%= table._id %>">
+    <label for="tableName">Bàn số:</label>
+    <input type="text" id="tableName" name="tableName" value="<%= table.name %>" required>
+
+    <label for="tablePrice">Số người:</label>
+    <input type="number" id="tablePrice" name="tablePrice" value="<%= table.price %>" required>
+
+    <label for="tableDescription">Mô tả:</label>
+    <textarea id="tableDescription" name="tableDescription" required><%= table.description %></textarea>
+
+    <label for="tableimage">Url hình ảnh:</label>
+    <input type="text" id="tableimage" name="tableimage" value="<%= table.image %>" required>
+
+    <button type="submit">Cập nhật</button>
+  </form>
+ 
+</body>
+</html>

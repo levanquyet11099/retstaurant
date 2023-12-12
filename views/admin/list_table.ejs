@@ -1,0 +1,72 @@
+
+  
+  <%- include('../layout/head.ejs') %>
+  <%- include('../layout/mid.ejs') %>
+  <h1>table List</h1>
+  <% if (user) { %>
+    <p class="welcome-message">Welcome, <%= user.username %>!</p>
+    <div class="centered-element"> <a href="/api/v1/table/add_table" class="button"  >Add table</a></div>
+    <br></br>
+    <form class="right-align" action="/logout" method="get"> 
+      <button type="submit" class="button">Logout</button>
+    </form>
+    <div class="centered-element"> 
+      <form action="/api/v1/table/searchtable" method="post"> 
+        <input type="text" id="searchtable" name="searchtable" placeholder="Tìm sản phẩm ...">
+        <button type="submit" class="button">Search table</button>
+      </form>
+      
+    </div>
+    <ul>
+      <% tables.forEach(table => { %>
+        <li>
+          <article class="card table-item">
+            <div class="card__image">
+             
+            </div>
+            <div class="card__content">
+              <h2 class="table__price">Bàn số: <%= table.name %></h2>
+              <h2 class="table__price">Số người: <%= table.price %></h2>
+              <p class="table__description"> Mô tả: <%= table.description %></p>
+              <p class="table__image">Url:<%= table.image %></p>
+            </div>
+            <div class="card__actions">            
+              <ul> 
+                <form action="/api/v1/table/update/<%= table.id_table %>" method="get"> 
+                        <button type="submit" class="button">Sửa bàn</button>
+                </form>
+                <form action="/api/v1/table/Delete/<%= table.id_table %>" method="post"> 
+                        <button type="submit" class="button">Xóa bàn</button>
+                </form> 
+              </ul>
+            </div>
+          </article>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <div class="centered-element"> <a href="/login" class="button"  >Login</a></div>
+    
+    <ul>
+      <% tables.forEach(table => { %>
+        <li>
+          <article class="card table-item">
+            <div class="card__image">
+              <img src="<%= table.image %>" alt="<%= table.name %>">
+            </div>
+            <div class="card__content">
+              <h2 class="table__price">Tên: <%= table.name %></h2>
+              <h2 class="table__price">Giá: Liên hệ</h2>
+              <p class="table__description"><%= table.description %></p>
+            </div>
+          </article>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+  <ul>
+    
+</ul>
+<%- include('../layout/bot.ejs') %>
+</body>
+</html>

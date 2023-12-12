@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Restaurant App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+    <link rel="stylesheet" href="/stylesoder1.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+   
+    <ul>  <a class= 'button' href="/index">Trang chủ</a></ul>
+    <!-- Left Form (Menu) -->
+    <div class="left-form">
+        <form id="tableInfoForm">
+            <h2>Thông Tin Bàn</h2>
+                    <!-- Hiển thị thông tin của bàn đầu tiên trong mảng -->
+                    <% if (tables) { %>
+                        <label>Bàn số: <%= tables.name %></label>
+                        <% } else { %>
+                            <p>Không có thông tin bàn.</p>
+                        <% } %>
+                    <label>Bàn số: <%= tables.name %></label>
+                    <p>ID Table: <%= tables.id_table %></p>
+                    <% if (tables.Status == "1"){%>
+                         <p>trang thai ban :co khach</p> 
+                        
+                         <p>tổng tiền bàn : <%= tables.total %> </p> 
+                         <% }else{ %>
+                        <p>trang thai ban :vang khach</p> 
+                            <% } %>
+                <!-- Xử lý trường hợp tables không phải là mảng -->       
+            
+        </form>
+         <!-- Hiển thị thông tin sản phẩm -->
+    <form id="productInfoForm">
+        <h2>Thông Tin Món Đã đặt</h2>
+        <!-- Lặp qua mảng sản phẩm của bàn -->
+        <% if (tables2 && Array.isArray(tables2.id_product)) { %>
+            <% tables2.id_product.forEach(product => { %>
+                <label>Tên món: <%= product.name %></label>
+                <label>Số lượng: <%= product.quantity %></label>
+                <label>Giá: <%= product.price %></label>
+                <!-- Hiển thị thông tin khác của mỗi sản phẩm tại đây -->
+            <% }); %>
+        <% } else { %>
+            <p>Không có thông tin món.</p>
+        <% } %>
+        
+        <!-- Hiển thị tổng hóa đơn -->
+        <label>Tổng hóa đơn: <%= tables.total %> %></label>
+
+        <!-- Nút Save -->
+        <button type="button" onclick="saveBill()">Save</button>
+    </form>
+    </div>
+
+    <!-- Right Form (Table Information) -->
+    
+<div class="right-form">
+    
+        <h2>Menu</h2>
+        <!-- Display menu items from the database -->
+        <ul class="product-list">
+            <% products.forEach(product => { %>
+                <li>
+                    <article class="card product-item">
+                        <div class="card__image">
+                            <img src="<%= product.image %>" alt="<%= product.name %>">
+                        </div>
+                        <div class="card__content">
+                            <h2 class="product__price">Tên: <%= product.name %></h2>
+                            <h2 class="product__price">Giá: <%= product.price %></h2>
+                            <p class="product__description"> Mô tả: <%= product.description %></p>
+                            <p class="product__description">id sp: <%= product.id_product %></p>
+                            <p class="product__description"> id table: <%= tables.id_table %></p>
+                        </div>
+                        <div class="card__actions">            
+                            <ul> 
+                               
+                                <form class = "myForm" > 
+                                    <input type="hidden" name="id_table" id = "id_table" value="<%= tables.id_table %>">
+                                    <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
+                                    <button type="submit" class="button" onclick="submitForm(event)">Thêm món</button>
+                                </form>
+                
+                                <form action="/api/v1/table/add_table_product/add" method="post"> 
+                                    <input type="hidden" name="id_table" id = "id_table" value="<%= tables.id_table %>">
+                                    <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
+                                    <button type="submit" class="button">Thêm món 1 </button>
+                            </form> 
+                            <form class = "myForm2"> 
+                                <input type="hidden" name="id_table" id = "id_table" value="<%= tables.id_table %>">
+                                <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
+                               
+                                <button class="add-to-cart-btn_button" data-table-id="<%= tables.id_table %>" data-product-id="<%= product.id_product %>">Add to Cart</button>
+                        </form> 
+
+                            </ul>
+                        </div>
+                    </article>
+                </li>
+                <br>
+            <% }); %>
+        </ul>
+       
+    
+</div>
+<script>
+  // Sử dụng sự kiện delegate để xử lý nút được click
+document.addEventListener('click',async function(event) {
+    // Kiểm tra xem nút được click có class là 'add-to-cart-btn' hay không
+    if (event.target.classList.contains('add-to-cart-btn_button')) {
+        // Lấy thông tin từ data attributes
+        const tableId = event.target.getAttribute('data-table-id');
+        const productId = event.target.getAttribute('data-product-id');
+        // Sử dụng Fetch API để gửi dữ liệu đến API
+       try {
+        const response = await fetch('/api/v1/table/add_table_product/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id_table: tableId, id_product: productId }),
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Xử lý phản hồi từ API (nếu cần)
+        const result = await response.json();
+        console.log("Ket qua:::",result);
+       
+       } catch (error) {
+        console.error('There was a problem with the fetch operation:', error.message);
+    } 
+    }
+});
+
+</script>
+
+</body>
+</html>

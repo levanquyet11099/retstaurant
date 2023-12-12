@@ -1,0 +1,220 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .right-align {
+    float: right;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input {
+    width: 200px;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  .card__actions {
+    text-align: center; 
+  }
+  /* style.css */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #3498db; /* Màu xanh dương */
+  color: #fff; /* Màu chữ trắng */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  color: #fff; /* Màu chữ trắng */
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.menu li {
+  margin-right: 20px;
+}
+
+.menu a {
+  color: #201c1c; /* Màu chữ trắng */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.account {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Add more styles as needed */
+
+  .card__actions a.button {
+    display: inline-block; 
+    padding: 10px 20px; 
+    background-color: #007bff; 
+    color: #3a2c2c; 
+    text-decoration: none; 
+   
+  }
+  .centered-element {
+    text-align: center;
+  }
+  button {
+    background-color: #4CAF50;
+    color: rgb(58, 31, 31);
+    padding: 10px 15px;
+    border: none;
+   
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #104613;
+  }
+  ul li img {
+    max-width: 100px; 
+    height: auto; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease-in-out; 
+  }
+  /* style.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* Đảm bảo các phần tử nằm dưới nhau */
+  min-height: 100vh; /* Đảm bảo chiều cao tối thiểu cho trang */
+}
+
+header {
+  background-color: #3498db; /* Màu nền của thanh bar */
+  color: #fff; /* Màu chữ trắng */
+  padding: 10px;
+  text-align: center; /* Căn giữa nội dung trong thanh bar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho thanh bar */
+}
+
+/* Các kiểu khác cho phần còn lại của trang web ở đây */
+
+ 
+  ul li img:hover {
+    transform: scale(1.1); 
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .card__image {
+    text-align: center; /* Căn giữa ảnh */
+    
+  }
+  .card__image img {
+    width: 300px;
+    height: auto;
+  }
+
+  .card__content {
+    padding: 15px;
+  }
+
+  .product__price {
+    color: #3498db;
+  }
+
+  .product__description {
+    color: #555;
+  }
+
+  .button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #217dbb;
+  }
+
+  .card__actions {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  ul {
+   
+    justify-content: space-around; 
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: center;*/
+  }
+
+  li {
+    
+    width: 400px;
+    margin: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #3498db;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+  }
