@@ -111,8 +111,10 @@
 <script>
   // Sử dụng sự kiện delegate để xử lý nút được click
 document.addEventListener('click',async function(event) {
+    
     // Kiểm tra xem nút được click có class là 'add-to-cart-btn' hay không
     if (event.target.classList.contains('add-to-cart-btn_button')) {
+        event.preventDefault();
         // Lấy thông tin từ data attributes
         const tableId = event.target.getAttribute('data-table-id');
         const productId = event.target.getAttribute('data-product-id');
