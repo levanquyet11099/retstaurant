@@ -40,8 +40,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 mongoose.connect('mongodb+srv://quyet1911:htHx2yRmV6g7d9ZL@cluster0.e1wg4.mongodb.net/restaurant?retryWrites=true&w=majority');
 
+app.get('/', (req, res) => {
+  res.render('login'); 
+});
 app.use(routerlogin);
 app.use(routeroder);
 app.use('/api/v1/table',routertable);

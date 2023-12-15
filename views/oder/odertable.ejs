@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/png" href="/public/images/favicon.png">
     <link rel="stylesheet" href="/stylesoder1.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-</head>
+    
 <body>
    
     <ul>  <a class= 'button' href="/index">Trang chủ</a></ul>
@@ -79,7 +78,7 @@
                         </div>
                         <div class="card__actions">            
                             <ul> 
-                               
+                               <!--
                                 <form class = "myForm" > 
                                     <input type="hidden" name="id_table" id = "id_table" value="<%= tables.id_table %>">
                                     <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
@@ -91,6 +90,7 @@
                                     <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
                                     <button type="submit" class="button">Thêm món 1 </button>
                             </form> 
+                             -->
                             <form class = "myForm2"> 
                                 <input type="hidden" name="id_table" id = "id_table" value="<%= tables.id_table %>">
                                 <input type="hidden" name="id_product" id = "id_product" value="<%= product.id_product %>">
@@ -108,8 +108,11 @@
        
     
 </div>
-<script>
-  // Sử dụng sự kiện delegate để xử lý nút được click
+<script src = "main.JS" ></script>
+ <script>
+    // document.addEventListener('click',async function(event) {
+    //     handleAddToCartButtonClick(event);
+    // });
 document.addEventListener('click',async function(event) {
     
     // Kiểm tra xem nút được click có class là 'add-to-cart-btn' hay không
@@ -140,7 +143,8 @@ document.addEventListener('click',async function(event) {
     }
 });
 
-</script>
-
+ </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 </body>
 </html>

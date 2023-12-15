@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Product = require('./product');
 
 
+
+
 const tableProductSchema = new mongoose.Schema({
     id_table: { type: String, ref: 'Table' },
     id_product: { type: String, ref: 'Product' },
@@ -11,9 +13,6 @@ const tableProductSchema = new mongoose.Schema({
     price: Number,
     total: Number,
     name: String,
-
-    
-   
 });
 
 tableProductSchema.statics.saveTableProduct = async function (tableId, productId) {
@@ -29,8 +28,6 @@ tableProductSchema.statics.saveTableProduct = async function (tableId, productId
             console.log("save +1 ", newTableProduct);
             return newTableProduct;
         }else{
-          console.log("table:",{tableId});
-         
             const  newTableProduct = new TableProduct({ id_table: tableId, id_product: productId, quantity : 1 , Status : "1" , nameproduct : nameproduct1.name, price: nameproduct1.price, total : nameproduct1.price });
             await newTableProduct.save();
             console.log("save =1", newTableProduct);
@@ -42,6 +39,6 @@ tableProductSchema.statics.saveTableProduct = async function (tableId, productId
   };
 
 
-const TableProduct = mongoose.model('tableproduct', tableProductSchema);
+const TableProduct = mongoose.model('tableproduct', tableProductSchema,'tableproducts');
 
 module.exports = TableProduct;

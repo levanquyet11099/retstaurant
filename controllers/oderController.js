@@ -47,34 +47,26 @@ module.exports.getTableproductlistt = async (req, res) => {
       if(!user){
         res.redirect('/login');
       }
+      //lay du lieu duoc gui tu view(html)
       const  id_table = req.body.id_table;
       const id_product =req.body.id_product;
       const tableId = id_table
       const productId = id_product;
-     
+      
       if(productId){
-        const newTableProduct = await TableProduct.saveTableProduct(tableId,  productId);   
-        const tableProducts = await TableProduct.find({ id_table: tableId });
-        let totalPriceForTable = 0;
-        let quantityTable =0;
-        tableProducts.forEach((tableProduct) => {
-            // Cộng giá trị total của từng tableProduct vào tổng giá trị của bàn
-            totalPriceForTable += tableProduct.total;
-            quantityTable += tableProduct.quantity;
-        });
-          tables1 = await Table.updateOne(
-            { id_table: tableId }, 
-            {  $set: {
-              total: totalPriceForTable,
-              quantity: quantityTable,
-            }, } ,
-          );
-          const tables = await Table.find({id_table: tableId});
-         
+        //goi phuong thuc tinh trong tableproduct de luu san pham tren ban va tinh tong gia cho moi loai mon
+        const newTableProduct = await TableProduct.saveTableProduct(tableId,productId);   
+         //goi phuong thuc tinh trong table de tinh tong gia tien cho moi ban
+        const tableProducts = await Table.totalPriceForTable(tableId);
+        //lay thong tin ban de hien thi ra infortable
+        const tables = await Table.find({id_table: tableId});
+         //lay thong tin mon an tren ban de hien thi ra menu
           let tables2 = await TableProduct.find({id_table: tableId});
+          //loai bo phan tu null neu co trong tables2
           tables2 = tables2.filter(
             (record) => record.id_product !== null && record.id_table !== null
           );
+           //lay thong tin mon an de hien thi ra menu
           const products = await Product.find();
           res.render('../views/oder/odertable', {tables, user, products,tables2 });
       }else{
